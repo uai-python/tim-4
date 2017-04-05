@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jakarta Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<h2 align="center">Quiz {% if number %} {{number}} {% endif %}</h2>
+    <div class="container">
+        {% if user %}
+                    <p>Hello <b>{{ user }}</b></p>
+        {% endif %}
+        <hr/>
+        {% for data in data %}
+            <h3>{{ data.Pertanyaan }}</h3>
+            {% if request.form['jawaban'] != None %}
+            Anda Benar pada Jawaban Sebelumnya
+            {% endif %}
+        {% endfor %}
+        <hr/>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <form method="post" action="test">
+            <div class="col-xs-5">
+                Jawaban Anda :
+                    <input type="text" name="jawaban" >
+                    
+                    {% for data in data %}
+                        <input type="hidden" name="jawaban_asli" value="{{ data.Jawaban }}">
+                        <input type="hidden" name="pertanyaan" value="{{ data.Pertanyaan }}">
+                    {% endfor %}
+                
+            
+            </div>
+            <div class="col-xs-2">
+                <button type="submit" class="btn btn-default">Periksa Hasil</button>
+            </div>
+        </form>
+
+        <a href="logout"><button type="submit" name="logout" value="logout" class="btn btn-default">Keluar</button></a>
+
+    </div>
+
+</body>
+</html>
